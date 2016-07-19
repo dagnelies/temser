@@ -1,0 +1,13 @@
+main page
+
+<? data = basic/list.json ?>
+
+{{#data}}
+    {{.}}
+{{/data}}
+
+<? include basic/foo.tml ?>
+
+{{=<% %>=}}
+{{Look at the curlies!}}
+<%={{ }}=%>
