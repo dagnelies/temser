@@ -2,8 +2,23 @@ import pystache
 import re
 import os.path
 import json
+import urllib.request
 
+'''
+Flow of execution:
 
+1. fetch all include
+2. replace $args with their argument values
+3. fetch data sources
+4. apply templating
+
+'''
+
+def remote_fetch(path):
+    content = urllib.request.urlopen("http://example.com/foo/bar").read()
+    return content
+    
+    
 def local_fetch(path, root):
     fullpath = os.path.abspath( os.path.join(root, path.strip('/\\')) )
     if not fullpath.startswith(root):
@@ -21,30 +36,36 @@ _code_re = re.compile('<\?.+\?>')
 
 class Barmaid:
     
-    def __init__(self, root='.', local=True, routers={}):
+    def __init__(self, root='.', local=True, hooks={}):
         self.root = os.path.abspath(root) + os.sep
         self.local = local
-        self.routers = routers
+        self.hooks = hooks
         
-    def fetch(self, path):
-        if self.routers:
-            for k,v in self.routers.items():
+    def fetch(self, path, parsed):
+        if self.hooks:
+            for k,v in self.hooks.items():
                 if path.startswith(k):
-                    return v(path)
+                    return v(path, format)
         
         if path.startswith('http://') or path.startswith('https://'):
             if self.local:
                 raise Exception('Remote content not allowed in local mode.')
             else:
-                return remote_fetch(path)
+                content = remote_fetch(path)
         else:
             try:
-                return local_fetch(path, self.root)
+                content = local_fetch(path, self.root)
             except Exception as e:
                 raise Exception('Invalid path: %s' % path, e)
+                
+        if not parsed:
+            return content
+        else:
+            return json.loads(content)
+            
             
     def mix(self, path, **kwargs):
-        template = self.fetch(path)
+        template = self.fetch(path, False)
         
         # fetch all includes (possibly caching the result)
         template = self.resolve_includes(template)
@@ -78,7 +99,7 @@ class Barmaid:
                 raise Exception('A single token is expected after include instead of: %s' % tag)
                 
             path = tokens[1]
-            template = self.fetch(path)
+            template = self.fetch(path, False)
             return self.resolve_includes(template)
             
         template = _code_re.sub(replace_include, template)    
@@ -116,7 +137,8 @@ class Barmaid:
         template = _code_re.sub(extract_data, template)    
         
         for k,v in data.items():
-            data[k] = json.loads( self.fetch(v) )
+            value = self.fetch(v, True)
+            data[k] = value
         
         return template, data
         

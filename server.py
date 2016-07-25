@@ -2,17 +2,19 @@ import bottle
 import barmaid
 import os
 import os.path
+import json
 
-ROOT='examples'
-app = bottle.Bottle()
+ROOT = 'examples'
+app  = bottle.Bottle()
 maid = barmaid.Barmaid(root=ROOT)
 
 def exists(path):
-    return os.path.exists(ROOT + os.sep + path)
+    return os.path.exists(os.path.join(ROOT,path))
+    
 @app.get('/')
 def index():
     for file in ['index.tml', 'index.html']:
-        if exists(file):
+        if os.path.exists( os.path.join(ROOT,file) ):
             return serve(file)
             
     bottle.abort(404)

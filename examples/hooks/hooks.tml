@@ -1,0 +1,9 @@
+<? data = @countdown/$n ?>
+
+<pre>
+Countdown:
+
+{{#data}}
+    {{.}}
+{{/data}}
+</pre>
