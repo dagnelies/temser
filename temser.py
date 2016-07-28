@@ -3,6 +3,7 @@ import re
 import os.path
 import json
 import urllib.request
+import bottle
 
 '''
 Flow of execution:
@@ -21,6 +22,7 @@ def remote_fetch(path):
     
 def local_fetch(path, root):
     fullpath = os.path.abspath( os.path.join(root, path.strip('/\\')) )
+    
     if not fullpath.startswith(root):
         raise Exception("Access denied: %s" % path)
     
@@ -34,7 +36,7 @@ _params_re = re.compile('\$\w+')
 _code_re = re.compile('<\?.+\?>')
 
 
-class Barmaid:
+class TemSer:
     
     def __init__(self, root='.', local=True, hooks={}):
         self.root = os.path.abspath(root) + os.sep
@@ -64,7 +66,7 @@ class Barmaid:
             return json.loads(content)
             
             
-    def mix(self, path, **kwargs):
+    def render(self, path, **kwargs):
         template = self.fetch(path, False)
         
         # fetch all includes (possibly caching the result)
@@ -142,7 +144,25 @@ class Barmaid:
         
         return template, data
         
+
+    def run(self, **kwargs):
+        app  = bottle.Bottle()
         
-if __name__ == "__main__":
-    b = Barmaid(root='examples')
-    print(b.mix('basic/page.tml', foo='FOO', bar='BAR'))
+        @app.get('')    
+        @app.get('/')
+        def index():
+            for file in ['index.tml', 'index.html']:
+                if os.path.exists( os.path.join(self.root, file) ):
+                    return serve(file)
+                    
+            bottle.abort(404)
+        
+        @app.get('<path:path>')
+        def serve(path):
+            if path.endswith('.tml'):
+                params = bottle.request.params
+                return self.render(path, **params)
+            else:
+                return bottle.static_file(path, root=self.root)
+            
+        app.run(**kwargs)

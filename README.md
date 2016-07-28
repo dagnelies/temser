@@ -1,8 +1,23 @@
-Mustache Template Server
-========================
+TemSer: the simple Template Server
+==================================
 
-It works like a plain normal web server, except that it interprets `*.tml` files to serve dynamic content.
+TemSer is a templating engine, containg also a built-in server.
+
+The built-in server works like a plain normal web server, except that it interprets `*.tml` files to serve dynamic content.
 TML is short for "Templated Markup Language" and is an extension of mustache templates.
+
+Additionally to usual `{{mustache}}` tags, it also supports:
+
+- `<? foo = path/to/some/json ?>` to fetch the actual data to be used in the template
+- `<? include path/to/some/file ?>` to include local or remote content
+- `$foo_bar` to identify URL parameters directly
+
+By combining these features, the data fetched can depend on the URL parameters, 
+hence result in differently filled templates.
+
+
+> ***TODO: $ escaping!***
+
 
 Install
 -------
@@ -11,26 +26,28 @@ Requires python 3
 
 `pip install temser`
 
-
-
 Usage
 -----
 
+```python
+import temser
 
-### ...as a standalone server
-
-TODO
-
-`python temser.py -p 8080 -d directory/to/serve`
-
-### ...only the templating library
-
-```
-import barmaid
-maid = barmaid.Barmaid(root='some/dir')
-rendered = barmaid.mix('file/path', foo='Arbitrary', bar='Args')
+ts = temser.TemSer(root='directory/to/serve')
+ts.run(debug=True, host='0.0.0.0', port=80)
 ```
 
+> TODO: make also a command line like:
+>
+> `python temser.py -p 8080 -d directory/to/serve`
+
+Instead of acting as a server, you can also use the template engine independently:
+
+```
+import temser
+
+ts = temser.TemSer(root='directory/to/serve')
+result = ts.render('file/path', foo='Arbitrary', bar='Args')
+```
 
 Templates
 ---------
@@ -99,6 +116,7 @@ As such, they cannot contain `{{mustache}}` nor `$arg` as part of their URL.
 2. Although included fragments can include their own data sources, they cannot redefine
 existing ones with a different URL.
 
+<b style="color:red">TODO: use relative imports!</b>
 
 ### Custom hooks
 
@@ -108,31 +126,33 @@ fetch content/data from local files or per HTTP from remote or local URLs.
 
 If you want to fetch custom content/data directly, "hooks" can be used:
 ```
+def countdown(path, parsed):
+    n = int(path.strip('/'))
+    res = list(range(n,0,-1))
+    if parsed:
+        return res
+    else:
+        return json.dumps(res)
 
+ts = temser.TemSer()
+ts.hooks['@countdown'] = countdown
 ```
 
----------
-
-Standalone server
------------------
-
-### Config
-
-Same as canister + json.config
-
+Using a template `countdown.tml` like this:
 ```
-{
-	"theme": {
-		"url": "http://whatever/theme",
-		"params": {
-			"title": "Fancy",
-			"menu": [{
-				"label": "Home",
-				"url": "/index.tml"
-			}]
-		}
-}
-
+<? nums = @countdown/$n ?>
+<html>
+	<body>
+		{{#nums}} {{.}} {{/nums}}
+	</body>
+</html>
 ```
 
-### Themes
+And calling `http://.../countdown.tml?n=5` would result in:
+
+```
+<html>
+	<body>
+		 5  4  3  2  1
+	</body>
+</html>

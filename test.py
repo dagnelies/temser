@@ -1,8 +1,9 @@
-import server
+import temser
 import json
 
+ts = temser.TemSer(root='./examples')
+print(ts.render('basic/basic.tml', foo='FOO', bar='BAR'))
 
-# To JSON or not?
 def countdown(path, parsed):
     tokens = path.strip('/').split('/')
     if len(tokens) < 2:
@@ -15,7 +16,9 @@ def countdown(path, parsed):
     else:
         return json.dumps(res)
 
-server.maid.hooks['@countdown'] = countdown
+ts.hooks['@countdown'] = countdown
 
-server.app.run(debug=True, reloader=True, host='0.0.0.0')
+ts.run(debug=True, host='0.0.0.0')
+
+
 
