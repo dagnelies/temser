@@ -1,9 +1,11 @@
-import pystache
+import pybars
+import markdown
 import re
 import os.path
 import json
 import urllib.request
 import bottle
+
 
 '''
 Flow of execution:
@@ -11,7 +13,7 @@ Flow of execution:
 1. fetch all include
 2. replace $args with their argument values
 3. fetch data sources
-4. apply templating
+4. apply handlebars or markdown first templating
 
 '''
 
@@ -42,6 +44,7 @@ class TemSer:
         self.root = os.path.abspath(root) + os.sep
         self.local = local
         self.hooks = hooks
+        self.server = None
         
     def fetch(self, path, parsed):
         if self.hooks:
@@ -79,7 +82,11 @@ class TemSer:
         template, data = self.gather_data(template)
         
         # apply templating
-        template = pystache.render(template, data)
+        template = pybars.render(template, data)
+        
+        # apply markdown
+        
+        # put it into theme
         
         # check for remaining tags
         m = _code_re.search(template)
@@ -145,13 +152,17 @@ class TemSer:
         return template, data
         
 
+    
     def run(self, **kwargs):
-        app  = bottle.Bottle()
+        if not self.server:
+            self.server = bottle.Bottle()
+            
+        app = self.server
         
         @app.get('')    
         @app.get('/')
         def index():
-            for file in ['index.tml', 'index.html']:
+            for file in ['index.tml', 'index.tmd', 'index.html']:
                 if os.path.exists( os.path.join(self.root, file) ):
                     return serve(file)
                     

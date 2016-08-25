@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='temser',
-    version='0.1.0',
+    version='0.1.2',
     description='A templating engine and web server for data driven pages.',
     url='https://github.com/dagnelies/temser',
     author='Arnaud Dagnelies',
