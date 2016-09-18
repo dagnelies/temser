@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='temser',
-    version='0.1.2',
+    version='0.2.0',
     description='A templating engine and web server for data driven pages.',
     url='https://github.com/dagnelies/temser',
     author='Arnaud Dagnelies',
@@ -13,6 +13,7 @@ setup(
     scripts=['temser.py'],
     install_requires=[
         'bottle',
-        'pystache'
+        'pybars3',
+        'markdown'
     ]
 )

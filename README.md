@@ -22,7 +22,7 @@ hence result in differently filled templates.
 Install
 -------
 
-Requires python 3
+Requires python 3.5+
 
 `pip install temser`
 

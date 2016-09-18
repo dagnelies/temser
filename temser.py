@@ -1,11 +1,10 @@
 import pybars
-import markdown
 import re
 import os.path
 import json
 import urllib.request
 import bottle
-
+import markdown
 
 '''
 Flow of execution:
@@ -36,15 +35,16 @@ def local_fetch(path, root):
 
 _params_re = re.compile('\$\w+')
 _code_re = re.compile('<\?.+\?>')
-
+_include_re = re.compile('\{\{>>(.+)\}\}')
 
 class TemSer:
     
-    def __init__(self, root='.', local=True, hooks={}):
+    def __init__(self, root='.', local=True, hooks={}, theme=None):
         self.root = os.path.abspath(root) + os.sep
         self.local = local
         self.hooks = hooks
         self.server = None
+        self.theme = theme
         
     def fetch(self, path, parsed):
         if self.hooks:
@@ -68,7 +68,10 @@ class TemSer:
         else:
             return json.loads(content)
             
-            
+    
+    def render2(self, template, data):
+        pass
+    
     def render(self, path, **kwargs):
         template = self.fetch(path, False)
         
@@ -80,38 +83,40 @@ class TemSer:
         
         # fetch data sources
         template, data = self.gather_data(template)
-        
-        # apply templating
-        template = pybars.render(template, data)
-        
-        # apply markdown
-        
-        # put it into theme
-        
+
         # check for remaining tags
         m = _code_re.search(template)
         if m:
             raise Exception('Invalid tag: %s' % m.group(0))
+        
+        # apply handlebars templating
+        c = pybars.Compiler()
+        hbs = c.compile(template)
+        template = hbs(data)
+
+        # apply markdown
+        template = markdown.markdown(template)
+
+        # insert into theme
+        if self.theme:
+            path = self.theme['path'] + '/theme.html'
+            empty = self.fetch(path, False)
+            #print(empty)
+            hbs = c.compile(empty)
+            empty = hbs({'@theme': self.theme})
+            template = empty.replace('<?content?>', template)
             
         return template
 
     def resolve_includes(self, template):
         #print(template)
         def replace_include(match):
-            tag = match.group(0)
-            tokens = tag[2:-2].strip().split()
-            if tokens[0] != 'include':
-                # leave it unchanged
-                return tag
-            
-            if len(tokens) != 2:
-                raise Exception('A single token is expected after include instead of: %s' % tag)
-                
-            path = tokens[1]
+            path = match.group(1)
             template = self.fetch(path, False)
             return self.resolve_includes(template)
             
-        template = _code_re.sub(replace_include, template)    
+        template = _include_re.sub(replace_include, template)
+
         return template
 
 
@@ -167,12 +172,24 @@ class TemSer:
                     return serve(file)
                     
             bottle.abort(404)
-        
+
+        def check(path):
+            filename = os.path.abspath(os.path.join(root, filename.strip('/\\')))  
+            if not filename.startswith(root): 
+                raise HTTPError(403, "Access denied.") 
+            if not os.path.exists(filename) or not os.path.isfile(filename): 
+                raise HTTPError(404, "File does not exist.") 
+            if not os.access(filename, os.R_OK): 
+                raise HTTPError(403, "You do not have permission to access this file.") 
+
         @app.get('<path:path>')
         def serve(path):
-            if path.endswith('.tml'):
+            check(path)
+            if path.endswith('.tml') or path.endswith('.tmd'):
                 params = bottle.request.params
                 return self.render(path, **params)
+            if os.path.isdir( os.path.join(self.root, path) ):
+                pass
             else:
                 return bottle.static_file(path, root=self.root)
             
