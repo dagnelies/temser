@@ -1,0 +1,130 @@
+{
+  "results": [
+    {
+      "name": {
+        "title": "mr",
+        "first": "diego",
+        "last": "cano"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/3.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/3.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/3.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "mr",
+        "first": "mathias",
+        "last": "leroux"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/59.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/59.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/59.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "ms",
+        "first": "pia",
+        "last": "wagner"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/49.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/49.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/49.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "mrs",
+        "first": "esma",
+        "last": "adan"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/17.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/17.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/17.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "mr",
+        "first": "adério",
+        "last": "da paz"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/72.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/72.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "mr",
+        "first": "eddie",
+        "last": "garrett"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/0.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/0.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/0.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "mr",
+        "first": "darius",
+        "last": "berg"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/78.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/78.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/78.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "ms",
+        "first": "beverley",
+        "last": "ferguson"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/20.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/20.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/20.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "mrs",
+        "first": "trinidad",
+        "last": "herrera"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/95.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/95.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/95.jpg"
+      }
+    },
+    {
+      "name": {
+        "title": "madame",
+        "first": "amélie",
+        "last": "roy"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/64.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/64.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/64.jpg"
+      }
+    }
+  ],
+  "info": {
+    "seed": "6ff1c4aa810ea249",
+    "results": 10,
+    "page": 1,
+    "version": "1.1"
+  }
+}
