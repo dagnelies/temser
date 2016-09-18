@@ -1,22 +1,42 @@
-TemSer: the simple Template Server
-==================================
+Templo Server
+=============
 
 TemSer is a templating engine, containg also a built-in server.
 
-The built-in server works like a plain normal web server, except that it interprets `*.tml` files to serve dynamic content.
-TML is short for "Templated Markup Language" and is an extension of mustache templates.
+The built-in server works like a plain normal web server, 
+except that it interprets `*.tmd` files to serve dynamic content.
+TMD is short for "Templated Markdown".
 
-Additionally to usual `{{mustache}}` tags, it also supports:
+A typical template file is made of two parts. First, a header like:
+```
+<?
+foo = path/to/local/file.json
+bar = https://whatever.com/some/REST/api
+?>
+```
+which is used to fetch some data as JSON, that can be used later in the template.
+Then, the template itself, which is a combination of markdown and handlebars.
 
-- `<? foo = path/to/some/json ?>` to fetch the actual data to be used in the template
-- `<? include path/to/some/file ?>` to include local or remote content
-- `$foo_bar` to identify URL parameters directly
+```
+Example Title
+=============
 
-By combining these features, the data fetched can depend on the URL parameters, 
-hence result in differently filled templates.
+Listing the names in "foo":
+{{/each foo}}
+   - {{firstname}} {{lastname}}
+{{/each}}
+```
+
+Would result in:
+
+```
+<h1>...</h1>
+...
+```
+
+This piece is itself rendered in a customizable theme.
 
 
-> ***TODO: $ escaping!***
 
 
 Install
@@ -156,3 +176,8 @@ And calling `http://.../countdown.tml?n=5` would result in:
 		 5  4  3  2  1
 	</body>
 </html>
+```
+
+TODO
+----
+- $ escaping!
