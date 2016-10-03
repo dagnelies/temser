@@ -94,14 +94,15 @@ class TemSer:
         hbs = c.compile(template)
         template = hbs(data)
 
+        print(template)
         # apply markdown
-        template = markdown.markdown(template)
+        template = markdown.markdown(template, extensions=['markdown.extensions.extra'])
 
         # insert into theme
         if self.theme:
             path = self.theme['path'] + '/theme.html'
             empty = self.fetch(path, False)
-            #print(empty)
+            print(empty)
             hbs = c.compile(empty)
             empty = hbs({'@theme': self.theme})
             template = empty.replace('<?content?>', template)
@@ -164,32 +165,41 @@ class TemSer:
             
         app = self.server
         
-        @app.get('')    
-        @app.get('/')
-        def index():
-            for file in ['index.tml', 'index.tmd', 'index.html']:
-                if os.path.exists( os.path.join(self.root, file) ):
-                    return serve(file)
-                    
-            bottle.abort(404)
-
         def check(path):
-            filename = os.path.abspath(os.path.join(root, filename.strip('/\\')))  
-            if not filename.startswith(root): 
-                raise HTTPError(403, "Access denied.") 
+            filename = os.path.abspath(os.path.join(self.root, path.strip('/\\')))  
+            if not filename.startswith(self.root): 
+                raise bottle.HTTPError(403, "Access denied.") 
             if not os.path.exists(filename) or not os.path.isfile(filename): 
-                raise HTTPError(404, "File does not exist.") 
+                raise bottle.HTTPError(404, "File does not exist.") 
             if not os.access(filename, os.R_OK): 
-                raise HTTPError(403, "You do not have permission to access this file.") 
+                raise bottle.HTTPError(403, "You do not have permission to access this file.") 
 
-        @app.get('<path:path>')
-        def serve(path):
-            check(path)
-            if path.endswith('.tml') or path.endswith('.tmd'):
-                params = bottle.request.params
-                return self.render(path, **params)
+        
+        @app.get('')
+        @app.get('/')
+        @app.get('/<path:path>')
+        def serve(path=''):
+            print(path)
+            #check(path)
+            params = bottle.request.params
+            print(self.root)
+            print( os.path.join(self.root, path) )
+            isdir = os.path.isdir( os.path.join(self.root, path) )
+            print(isdir)
             if os.path.isdir( os.path.join(self.root, path) ):
-                pass
+                # check if there is an index file
+                for file in ['index.tml', 'index.tmd', 'index.html']:
+                    index = os.path.join(self.root, path, file)
+                    print(index)
+                    if os.path.exists( index ):
+                        return serve(path + '/' + file)
+                # TODO: otherwise, render the dir
+                bottle.abort(404)
+                return '' #self.render_dir(path, **params)
+            
+            elif path.endswith('.tml') or path.endswith('.tmd'):
+                return self.render(path, **params)
+
             else:
                 return bottle.static_file(path, root=self.root)
             
