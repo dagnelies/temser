@@ -1,5 +1,5 @@
-TemSer: the simple Template Server
-==================================
+TemSer: Template Server
+=======================
 
 TemSer is a templating engine, containg also a built-in server.
 
