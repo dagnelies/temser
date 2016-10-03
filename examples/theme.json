@@ -1,0 +1,23 @@
+{
+	"title": "Example Title",
+	"description": "This is mainly used by search engines",
+	"keywords": "SEO keywords",
+	"menu": [{
+			"label": "Welcome",
+			"url": "/"
+		},{
+			"label": "Foo",
+			"url": "/foo.tmd"
+		},{
+			"label": "Bar",
+			"url": "/bar.tmd",
+			"submenu": []
+	}],
+	"social": {
+		"twitter": "",
+		"facebook": "",
+		"googleplus": "",
+		"reddit": ""
+	},
+	"footer": "Footer text"
+}

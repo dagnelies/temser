@@ -1,0 +1,83 @@
+
+<center>
+
+<img src="logo.svg" width="100px" /> Templo
+===========================================
+
+</center>
+
+
+What is Templo?
+---------------
+
+Templo enables you to combine data, templates and themes, converting it into plain HTML.
+This can be used as a static website generator, convinient for hosting the result anywhere.
+Alternatively, the built-in server can also be used for dynamic, data-driven websites.
+
+
+<img src="concept.png" width="60%" />
+
+
+
+
+Features
+--------
+
+- Write content using plain HTML or Markdown
+- Powerful templating using Handlebars
+- Fetch data from local json files or remote APIs
+- Fully customizable themes
+- Can be used as static website generator...
+- ...or as standalone dynamic template server
+
+Try it out
+----------
+
+...and write a page.
+
+<iframe src="demo.html" style="width:100%; height: 500px; border: 0px;"></iframe>
+
+More
+----
+
+The previous example features a single page. However, Templo, like any web server, serves the whole directory structure.
+
+Basically, all `*.tmd` and `*.tml` pages will be interpretted by Templo as templated pages and rendered/converted into HTML.
+
+There are also more features available than you just see in the previous example. You can:
+
+- include fragments in the page, like `\{\{>>ui/header.tmd}}` and `\{\{>>ui/footer.tml}}`
+- use the URL parameters to dynamically adjust the fetched data: `&lt;? mydata = http://mydatabase.site/api/$foo/$bar ?>` where `$foo` and `$bar` are placeholders 
+- parametrize the theme with menus, social links, etc.
+
+Themes
+------
+
+- bootstrap
+
+Examples
+--------
+
+- blog
+- image gallery
+- the movie DB listing
+- weather API
+
+
+Usage
+-----
+
+Python 3.5+ is required. Templo can then simply be installed using:
+
+`pip install templo`
+
+
+Templo can either be used as static website generator:
+
+`python templo -s <source-directory> -t <target-directory>`
+
+
+Or as a dynamic template server:
+
+`python templo -s <source-directory> -p 80`
+

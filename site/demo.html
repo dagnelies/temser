@@ -1,0 +1,64 @@
+<html>
+<head>
+	<style> 
+	html, body {
+		height: 100%;
+		padding: 0px;
+		margin: 0px;
+	}
+
+	.vflex {
+		display: flex;
+		flex-direction: column;
+		/*justify-content: space-around;
+		align-items: center;*/
+	}
+
+	.hflex {
+		display: flex;
+		/*
+		justify-content: space-around;
+		align-items: center;
+		*/
+	}
+
+	.hflex > *,
+	.vflex > *  {
+		flex: 1;
+	}
+
+	.toolbar {
+		flex: 0;
+		padding: 10px;
+	}
+	/*
+	iframe {
+		height: 90%;
+	}*/
+	</style>
+</head>
+<body class="vflex">
+	<div class="toolbar">
+		<div class="hflex">
+		<div>
+			Import example: 
+		</div>
+		<div>
+			Change theme: <select><option>Beach</option></select>
+		</div>
+		<div>
+			<button>Download</button>
+		</div>
+		</div>
+	</div>
+
+
+	<div class="hflex">
+		<textarea>
+		Bla bla bla...
+		</textarea>
+		<button style="flex:0">Go</button>
+		<iframe></iframe>
+	</div>
+</body>
+</html>

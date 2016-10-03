@@ -5,7 +5,7 @@ import json
 #ts = temser.TemSer(root='./examples', theme={'path': '/theme'})
 #print(ts.render('basic/basic.tml', foo='FOO', bar='BAR'))
 
-ts = temser.TemSer(root='..', theme={'path': '/themes/bootswatch/yeti'})
+ts = temser.TemSer(root='.', theme={'path': '/themes/bootswatch/yeti'})
 print(ts.render('examples/index.tmd'))
 
 def countdown(path, parsed):

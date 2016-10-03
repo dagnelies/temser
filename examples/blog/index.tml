@@ -1,0 +1,8 @@
+<!-- index.tml?article=... -->
+
+
+<div>
+
+</div>
+
+{{>>posts/$article.tmd}}

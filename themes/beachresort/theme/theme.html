@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>{{@theme.title}}</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+	<div id="background">
+		<div id="page">
+			<div id="header">
+				<div id="logo">
+					<a href="/"><img src="{{@theme.logo_img}}" alt="LOGO" height="100" width="100"></a>
+				</div>
+				<div id="navigation">
+					<ul>
+						{{#each @theme.menu}}
+						<li class="selected">
+							<a href="{{url}}">{{label}}</a>
+						</li>
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+			<div id="contents">
+				<div class="box">
+					<div>
+						<div class="body">
+						
+							{{>content}}
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div>
+				<ul class="navigation">
+					{{#@theme.menu}}
+						<li class="active">
+							<a href="{{url}}">{{label}}</a>
+						</li>
+					{{/}}
+				</ul>
+				<div id="connect">
+					<a href="{{@theme.social.pinterest_url}}" target="_blank" class="pinterest"></a>
+					<a href="{{@theme.social.facebook_url}}" target="_blank" class="facebook"></a>
+					<a href="{{@theme.social.twitter_url}}" target="_blank" class="twitter"></a>
+					<a href="{{@theme.social.googleplus_url}}" target="_blank" class="googleplus"></a>
+				</div>
+			</div>
+			<p>
+				{{@theme.copyright}}
+			</p>
+		</div>
+	</div>
+</body>
+</html>

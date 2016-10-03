@@ -1,0 +1,71 @@
+
+<link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet"> 
+  
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
+
+ <style> 
+.logo {
+    animation-name: color_cycle;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+/* Standard syntax */
+@keyframes color_cycle {
+    form { filter: hue-rotate(0deg); }
+    to { filter: hue-rotate(360deg); }
+}
+
+body {
+	font-family: helvetica;
+}
+
+h1 {
+	font-family: Baloo;
+	font-size: 50px;
+}
+
+img {
+	vertical-align: middle;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.flex > * {
+	flex: 1;
+	text-align: center;
+}
+</style>
+
+
+<center>
+
+	<h1><img src="logo.svg" width="100px" style="margin-top:-30px;"/> QuickPage</h1>
+
+</center>
+
+<div class="flex">
+	<div>
+		Import example: 
+	</div>
+	<div>
+		Change theme: <select><option>Beach</option></select>
+	</div>
+	<div>
+		<button>Download</button>
+	</div>
+</div>
+
+
+<div style="display: flex">
+	<textarea style="flex:1">
+	Bla bla bla...
+	</textarea>
+	<button>Go</button>
+	<iframe style="flex:1"></iframe>
+</div>
