@@ -37,22 +37,11 @@ https://daringfireball.net/projects/markdown/syntax
 Sometimes, there is content that you want to include in several pages, like headers, footers, or other UI parts.
 Instead of duplicating the markup code, you can simply `include` them, like this:
 
-{{#include}}/made_with_templo.tml{{/include}}
 
 ### Handling data
 
 You can also import data...
 
-{{#fetch people}}https://randomuser.me/api/?results=10&format=PrettyJSON&inc=name,picture{{/fetch}}
 
 ...and use it in a template, like this:
-
-<table>
-	{{#each people.results}}
-	<tr>
-		<td><img src="{{picture.thumbnail}}" ></td>
-		<td>{{name.first}} {{name.last}}</td>
-	</tr>
-	{{/each}}
-</table>
 

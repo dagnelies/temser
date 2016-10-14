@@ -1,0 +1,7 @@
+Static website generation
+=========================
+
+Usage
+-----
+
+`temser -s <source-directory> -t <target-directory> -T theme-config`
