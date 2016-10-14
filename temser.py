@@ -46,7 +46,10 @@ class TemSer:
         self.server = None
         self.theme = theme
         
-    def fetch(self, path, parsed):
+    def fetch(self, path, parsed, current=None):
+        if not current:
+            current = self.root
+            
         if self.hooks:
             for k,v in self.hooks.items():
                 if path.startswith(k):

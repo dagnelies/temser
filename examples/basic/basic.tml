@@ -1,13 +1,13 @@
 main page
 ---------
 
-<? data = basic/list.json ?>
+<? data = examples/basic/list.json ?>
 
 {{#data}}
 {{.}}. {{.}}
 {{/data}}
 
-{{>>basic/foo.tml}}
+{{>>examples/basic/foo.tml}}
 
 {{=<% %>=}}
 {{Look at the curlies!}}
