@@ -1,0 +1,37 @@
+Hooks
+=====
+
+Often, fetching data is enough. However, sometimes you need more. In this case, it would be useful to invoke custom code and fetch the result.
+This is exactly what hooks are for.
+
+Out of the box, only two hooks are available:
+```
+file: ./users.json
+json: {"name":"foo","flag":true,"counter":123}
+```
+
+And these are a few more available through a plugin:
+```
+http://...
+sql://...
+ftp://...
+```
+
+However, if you need something more specific, you can add your own. For example something like:
+```
+my_custom_handler: 123
+```
+
+This will call a function, providing the line as parameter, and expecting a json like object in return, or a primitive value. Here is an example that returns a list of N elements, where N is the provided parameter:
+```
+ts = TemSer()
+
+def my_custom_handler(param, args):
+	
+    n = int(param)
+    return list(range(n))
+
+ts.hooks['my_custom_handler'] = my_custom_handler
+```
+
+The additional `args` is a map containing the URL arguments. It is provided like this in case the have to be escaped in a specific way when substituting the `$` variables in the param line.

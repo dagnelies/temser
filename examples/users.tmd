@@ -1,16 +1,41 @@
 <? users = examples/users.json ?>
 
-| a   |   d |
-|-----|-----|
-|  b  |  c  |
+Here are some random users
+==========================
 
-| <img src="\{\{picture.thumbnail}}" /> | \{\{name.first}} \{\{name.last}} |
-|-----|-----|
-{{#each users.results}}| <img src="{{picture.thumbnail}}" /> | {{name.first}} {{name.last}} |
+<div class="row">
+{{#each users.results}}
+<div class="col-md-3">
+	<a class="thumbnail">
+		<br/>
+		<img class="img-circle" src="{{picture.medium}}" />
+		<div class="caption text-center">
+			<h3>{{name.first}} {{name.last}}</h3>
+		</div>
+	</a>
+</div>
 {{/each}}
+</div>
 
-Title
-=====
+
+The code
+--------
+
+```html
+	<div class="row">
+	\{{#each users.results}}
+	<div class="col-md-3">
+		<a class="thumbnail">
+			<br/>
+			<img class="img-circle" src="\{{picture.medium}}" />
+			<div class="caption text-center">
+				<h3>\{{name.first}} \{{name.last}}</h3>
+			</div>
+		</a>
+	</div>
+	\{{/each}}
+	</div>
+```
 
 Section
 -------
@@ -27,20 +52,20 @@ https://daringfireball.net/projects/markdown/syntax
 
 <table>
     <tr>
-        <td style="bg-color:#aff">You</td>
+        <td style="background-color:#aff">You</td>
 		<td></td>
-		<td style="bg-color:#faf">also</td>
+		<td style="background-color:#faf">also</td>
 		<td></td>
-		<td style="bg-color:#ffa">HTML</td>
+		<td style="background-color:#ffa">HTML</td>
 		<td></td>
     </tr>
 	<tr>
 		<td></td>
-        <td style="bg-color:#ccf">can</td>
+        <td style="background-color:#ccf">can</td>
 		<td></td>
-		<td style="bg-color:#fcc">use</td>
+		<td style="background-color:#fcc">use</td>
 		<td></td>
-		<td style="bg-color:#cfc">too!</td>
+		<td style="background-color:#cfc">too!</td>
     </tr>
 </table>
 

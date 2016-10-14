@@ -1,0 +1,70 @@
+<style> 
+.logo {
+    animation-name: color_cycle;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+/* Standard syntax */
+@keyframes color_cycle {
+    form { filter: hue-rotate(0deg); }
+    to { filter: hue-rotate(360deg); }
+}
+</style>
+
+
+Demo | Docs
+
+<center>
+
+	<h1><img src="logo.svg" width="20%" /> Templo</h1>
+
+	<br/>
+
+	<img class="logo" src="logo.png" width="40%" />
+
+	<img class="logo" src="logo2.jpg" width="40%" />
+
+	<h2>What is it?</h2>
+
+	
+	<img src="logo.png" width="40%" />
+
+	<img src="logo2.jpg" width="40%" />
+
+</center>
+
+	<div style="display: flex">
+	<img src="concept.png" width="30%" />
+		<ul>
+			<li>Fully customizable themes</li>
+			<li>Write using plain HTML or Markdown</li>
+			<li>Powerful templating using Handlebars</li>
+			<li>Fetch data from local json files or remote APIs</li>
+		</ul>
+	</div>
+	<h2>Try it out!</h2>
+
+
+<p>Theme:
+<select><option>Beach</option></select>
+</p>
+
+<div style="display: flex">
+	<textarea style="flex:1">
+	Bla bla bla...
+	</textarea>
+	<button>Go</button>
+	<iframe style="flex:1"></iframe>
+</div>
+
+Further demos
+-------------
+
+- normal website
+- selling an article
+- weather app
+- documents listing
+- picture gallery
+- simple blog

@@ -162,7 +162,7 @@ class TemSer:
         
 
     
-    def run(self, **kwargs):
+    def start(self, **kwargs):
         if not self.server:
             self.server = bottle.Bottle()
             
@@ -207,3 +207,18 @@ class TemSer:
                 return bottle.static_file(path, root=self.root)
             
         app.run(**kwargs)
+
+def run(root='.', local=True, theme=None, **kwargs):
+    if theme:
+        theme = json.loads(theme)
+    ts = TemSer(root, local, theme)
+    ts.start(**kwargs)
+
+def apply(root, source, theme, target):
+    ts = TemSer(root=root, theme=theme)
+    print(source)
+    out = ts.render(source)
+    print(out)
+    with open(target, 'w') as f:
+        f.write(out)
+    

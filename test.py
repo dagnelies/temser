@@ -1,12 +1,14 @@
 import temser
 import json
 
+#temser.run(debug=True, host='0.0.0.0')
 
 #ts = temser.TemSer(root='./examples', theme={'path': '/theme'})
 #print(ts.render('basic/basic.tml', foo='FOO', bar='BAR'))
 
-ts = temser.TemSer(root='.', theme={'path': '/themes/bootswatch/yeti'})
+ts = temser.TemSer(root='.', theme={'path': '/themes/bootswatch', 'flavor':'cerulean'})
 #print(ts.render('examples/index.tmd'))
+
 
 def countdown(path, parsed):
     tokens = path.strip('/').split('/')
@@ -22,7 +24,7 @@ def countdown(path, parsed):
 
 ts.hooks['@countdown'] = countdown
 
-ts.run(debug=True, host='0.0.0.0')
+ts.start(debug=True, host='0.0.0.0')
 
 
 

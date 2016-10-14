@@ -1,0 +1,14 @@
+Static website generation
+=========================
+
+Usage
+-----
+
+`temser -s <source-directory> -t <target-directory> -T theme-config`
+
+Options:
+
+- copy theme locally?
+- convert only *.tmd
+- change urls in content?
+- use relative theme paths (for offline view)
