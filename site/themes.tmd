@@ -1,2 +1,62 @@
+<style>
+    iframe.preview {
+        width:100%; height:600px;
+    }
+</style>
+
 Themes
 ======
+
+<div class="row">
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/cerulean.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/cosmo.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/custom.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/cyborg.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/darkly.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/flatly.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/journal.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/lumen.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/paper.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/readable.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/sandstone.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/simplex.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/slate.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/spacelab.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/superhero.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/united.html"></iframe>
+    </div>
+    <div class="col-md-12">
+        <iframe class="preview" src="themes/yeti.html"></iframe>
+    </div>
+</div>

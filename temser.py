@@ -86,6 +86,7 @@ class TemSer:
         
         # fetch data sources
         template, data = self.gather_data(template)
+        data['@theme'] = self.theme
 
         # check for remaining tags
         m = _code_re.search(template)
@@ -97,7 +98,7 @@ class TemSer:
         hbs = c.compile(template)
         template = hbs(data)
 
-        print(template)
+        #print(template)
         # apply markdown
         template = markdown.markdown(template, extensions=['markdown.extensions.extra'])
 
@@ -105,7 +106,7 @@ class TemSer:
         if self.theme:
             path = self.theme['path'] + '/theme.html'
             empty = self.fetch(path, False)
-            print(empty)
+            #print(empty)
             hbs = c.compile(empty)
             empty = hbs({'@theme': self.theme})
             template = empty.replace('<?content?>', template)
@@ -216,9 +217,7 @@ def run(root='.', local=True, theme=None, **kwargs):
 
 def apply(root, source, theme, target):
     ts = TemSer(root=root, theme=theme)
-    print(source)
     out = ts.render(source)
-    print(out)
     with open(target, 'w') as f:
         f.write(out)
     

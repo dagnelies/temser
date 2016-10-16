@@ -6,7 +6,25 @@ import json
 #ts = temser.TemSer(root='./examples', theme={'path': '/theme'})
 #print(ts.render('basic/basic.tml', foo='FOO', bar='BAR'))
 
-ts = temser.TemSer(root='.', theme={'path': '/themes/bootswatch', 'flavor':'cerulean'})
+theme = {
+    'path': '/themes/boostwatch',
+    'flavor':'cerulean',
+    'title': 'QuickPage',
+    'menu': [{
+        'label':'Intro',
+        'url':'index.tmd'
+    },{
+        'label':'Themes',
+        'url':'themes.tmd'
+    },{
+        'label':'Docs',
+        'url':'docs.tmd'
+    },{
+        'label':'Examples',
+        'url':'examples.tmd'
+    }]
+}
+ts = temser.TemSer(root='.', theme=theme)
 #print(ts.render('examples/index.tmd'))
 
 

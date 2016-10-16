@@ -6,7 +6,22 @@ import temser
 import os
 import os.path
 
+all_themes = []
 for subdir in os.listdir('themes/boostwatch'):
-    print 
     if os.path.isdir('themes/boostwatch/' + subdir):
-        temser.apply(root='.', source='examples/index.tmd', target='site/themes/' + subdir + '.html', theme={'path': '/themes/bootswatch', 'flavor': subdir})
+        all_themes.append({'label':subdir, 'url':subdir+'.html'})
+
+
+for subdir in os.listdir('themes/boostwatch'):
+    print(subdir)
+    if os.path.isdir('themes/boostwatch/' + subdir):
+        theme = {
+            'path': 'themes/boostwatch',
+            'flavor': subdir,
+            'title': subdir,
+            'menu': [{
+                'label': 'Themes',
+                'children': all_themes
+            }]
+        }
+        temser.apply(root='.', source='site/themes/index.tmd', target='site/themes/' + subdir + '.html', theme=theme)
